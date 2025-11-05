@@ -7,19 +7,20 @@
 <title>Chapter 5 Rcpp or how to easily embed C++ code into a package | endeav</title>
 <meta name="author" content="Robin Genuer 🌐 &amp; Boris Hejblum 🌐">
 <meta name="description" content="Rcpp (“R-C-Plus-Plus”) is a package which facilitates the interface between C++ and . is an interpreted language, a feature that makes a number of things easy (including giving us access to the...">
-<meta name="generator" content="bookdown 0.36 with bs4_book()">
+<meta name="generator" content="bookdown 0.45 with bs4_book()">
 <meta property="og:title" content="Chapter 5 Rcpp or how to easily embed C++ code into a package | endeav">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Rcpp (“R-C-Plus-Plus”) is a package which facilitates the interface between C++ and . is an interpreted language, a feature that makes a number of things easy (including giving us access to the...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 5 Rcpp or how to easily embed C++ code into a package | endeav">
 <meta name="twitter:description" content="Rcpp (“R-C-Plus-Plus”) is a package which facilitates the interface between C++ and . is an interpreted language, a feature that makes a number of things easy (including giving us access to the...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.7.1/jquery.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="libs/d3-3.5.6/d3.min.js"></script><link href="libs/profvis-0.3.6.9000/profvis.css" rel="stylesheet">
-<script src="libs/profvis-0.3.6.9000/profvis.js"></script><script src="libs/profvis-0.3.6.9000/scroll.js"></script><link href="libs/highlight-6.2.0/textmate.css" rel="stylesheet">
-<script src="libs/highlight-6.2.0/highlight.js"></script><script src="libs/profvis-binding-0.3.8/profvis.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-3.5.6/d3.min.js"></script><link href="libs/profvis-0.3.6.9000/profvis.css" rel="stylesheet">
+<script src="libs/profvis-0.3.6.9000/profvis.js"></script><script src="libs/profvis-0.3.6.9000/scroll.js"></script><link href="libs/highlight-11.10.0/textmate.css" rel="stylesheet">
+<script src="libs/highlight-11.10.0/highlight.min.js"></script><script src="libs/profvis-binding-0.4.0/profvis.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -77,13 +78,13 @@
 <ol style="list-style-type: decimal">
 <li>
 <p>To make your package ready for use with <code>Rcpp</code>, start by running the following command:</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_rcpp.html">use_rcpp</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li><p>See the changes made</p></li>
 <li>
 <p>You should also add the following 2 Roxygen comments in the general help page of the package, as indicated in the console:</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @useDynLib mypkgr</span></span>
 <span><span class="co">#' @importFrom Rcpp sourceCpp, .registration = TRUE</span></span>
 <span><span class="cn">NULL</span></span></code></pre></div>
@@ -108,7 +109,7 @@
 <li>Evaluate the performance gain of this new implementation <code>mvnpdf_invC</code>.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">mb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span><span class="fu">mvtnorm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html">dmvnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1.96</span>, nrow <span class="op">=</span> <span class="va">n</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                     <span class="fu">mvnpdf</span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1.96</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="va">n</span><span class="op">)</span>, Log<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>,</span>
@@ -119,18 +120,18 @@
 <span><span class="va">mb</span></span>
 <span><span class="co">## Unit: microseconds</span></span>
 <span><span class="co">##                                                            expr      min</span></span>
-<span><span class="co">##              mvtnorm::dmvnorm(matrix(1.96, nrow = n, ncol = 2))   43.706</span></span>
-<span><span class="co">##       mvnpdf(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE) 3334.735</span></span>
-<span><span class="co">##  mvnpdfsmart(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE) 2309.243</span></span>
-<span><span class="co">##  mvnpdfoptim(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE) 1737.785</span></span>
-<span><span class="co">##  mvnpdf_invC(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE) 2295.590</span></span>
-<span><span class="co">##         lq       mean    median       uq      max neval  cld</span></span>
-<span><span class="co">##    53.5255   66.97186   66.8095   76.465  101.926   100 a   </span></span>
-<span><span class="co">##  3453.1430 3609.39687 3541.6005 3638.443 7066.104   100  b  </span></span>
-<span><span class="co">##  2341.6330 2542.28823 2370.2100 2400.899 6528.512   100   c </span></span>
-<span><span class="co">##  1788.3585 1899.61774 1817.4070 1847.993 6017.037   100    d</span></span>
-<span><span class="co">##  2340.0955 2531.82134 2363.2605 2406.680 6656.678   100   c</span></span></code></pre></div>
-<div class="inline-figure"><img src="endeavR_files/figure-html/unnamed-chunk-33-1.png" width="672"></div>
+<span><span class="co">##              mvtnorm::dmvnorm(matrix(1.96, nrow = n, ncol = 2))  188.825</span></span>
+<span><span class="co">##       mvnpdf(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE) 5396.596</span></span>
+<span><span class="co">##  mvnpdfsmart(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE) 4058.746</span></span>
+<span><span class="co">##  mvnpdfoptim(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE) 2407.629</span></span>
+<span><span class="co">##  mvnpdf_invC(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE) 3840.668</span></span>
+<span><span class="co">##         lq       mean    median         uq        max neval cld</span></span>
+<span><span class="co">##    232.906   344.1637   273.650   298.6535   2122.496   100 a  </span></span>
+<span><span class="co">##  13537.457 12871.5029 14054.053 14318.7145  26788.724   100  b </span></span>
+<span><span class="co">##  11136.952 11727.7047 11554.553 11740.5210 170683.811   100  b </span></span>
+<span><span class="co">##   7154.191  6992.3132  7242.551  7419.2355  18647.275   100   c</span></span>
+<span><span class="co">##  11322.338 11042.1645 11528.500 11673.7525  23128.135   100  b</span></span></code></pre></div>
+<div class="inline-figure"><img src="endeavR_files/figure-html/unnamed-chunk-32-1.png" width="672"></div>
 </div>
 <div id="optimize-thanks-to-c" class="section level2" number="5.2">
 <h2>
@@ -146,7 +147,7 @@
 </blockquote>
 <p>You can download our proposal for <code>mvnpdfsmartC.cpp</code> <a href="https://endeavr.borishejblum.science/endeavR_files/mvnpdfsmartC.cpp">here</a>.</p>
 <p>For (relatively small) additional speed gain (at the cost of code readability!), you can have a look at our optimized Armadillo <code>C++</code> implementation in <a href="https://endeavr.borishejblum.science/endeavR_files/mvnpdfoptimC.cpp"><code>mvnpdfoptimC.cpp</code></a>.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">mb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span><span class="fu">mvtnorm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html">dmvnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1.96</span>, nrow <span class="op">=</span> <span class="va">n</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                     <span class="fu">mvnpdf</span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1.96</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="va">n</span><span class="op">)</span>, Log<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>,</span>
@@ -166,15 +167,15 @@
 ##                                             mvnpdf_invC(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE)
 ##  mvnpdfsmartC(x = matrix(1.96, nrow = 2, ncol = n), mean = rep(0,      2), varcovM = diag(2), Log = FALSE)
 ##  mvnpdfoptimC(x = matrix(1.96, nrow = 2, ncol = n), mean = rep(0,      2), varcovM = diag(2), Log = FALSE)
-##       min        lq       mean    median        uq      max neval  cld
-##    43.829   53.7100   64.21994   61.8895   73.9845  105.903   100 a   
-##  3284.797 3390.5770 3620.55092 3462.2655 3582.8465 7417.392   100  b  
-##  2300.387 2340.7925 2500.75113 2353.8305 2386.7535 5860.335   100   c 
-##  1728.601 1776.1405 1982.84569 1793.4220 1824.0285 9680.633   100    d
-##  2297.353 2336.0160 2392.90760 2356.0240 2380.2550 5090.355   100   c 
-##    51.209   53.5050   58.07404   56.1905   60.2085  122.344   100 a   
-##    35.670   37.8635   42.37268   41.1230   44.4645  115.866   100 a</code></pre>
-<div class="inline-figure"><img src="endeavR_files/figure-html/unnamed-chunk-35-1.png" width="672"></div>
+##       min       lq       mean    median        uq       max neval  cld
+##   144.387  277.007  1607.8173  1016.486  2633.708 11788.424   100 a   
+##  5301.563 9922.612 12756.4968 13589.075 14403.917 25850.349   100  b  
+##  4111.131 8012.778 10967.5647 11320.859 12122.223 31149.577   100   c 
+##  2370.525 4517.068  6274.4788  6921.958  7287.156 16035.720   100    d
+##  3946.423 7635.275 10018.6761  9994.239 11493.447 25829.129   100   c 
+##   135.603 2330.013  5493.1982  3132.823  5780.090 30762.030   100    d
+##    58.237   84.132   144.3231   154.361   176.805   784.954   100 a</code></pre>
+<div class="inline-figure"><img src="endeavR_files/figure-html/unnamed-chunk-34-1.png" width="672"></div>
 <p>Note that <code>Rcpp</code> functions can be used outside of a package architecture thanks to the <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html">Rcpp::sourceCpp()</a></code> function. But, as we have seen that it is always desirable to manage all of one’s code inside a package, it is unlikely that you will need this !</p>
 </div>
 <div id="annexe-5.1-premature-optimization-is-a-bad-idea" class="section level2 unnumbered">
@@ -214,7 +215,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>endeav<svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg></strong>: <em>a course on code efficiency and software development with R</em>" was written by <strong><em>Robin Genuer</em></strong> <a href="https://robin.genuer.fr/">🌐</a> &amp; <strong><em>Boris Hejblum</em></strong> <a href="https://borishejblum.science/">🌐</a>. It was last built on 2023-11-16.</p>
+    <p>"<strong>endeav<svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg></strong>: <em>a course on code efficiency and software development with R</em>" was written by <strong><em>Robin Genuer</em></strong> <a href="https://robin.genuer.fr/">🌐</a> &amp; <strong><em>Boris Hejblum</em></strong> <a href="https://borishejblum.science/">🌐</a>. It was last built on 2025-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

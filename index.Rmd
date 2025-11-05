@@ -17,7 +17,7 @@ The main goal of this course is to give you tools that ease (high-performing and
 important computation times.
 
 We will focus the presentation of these development tools on the notion of **package**. *You are already familiar with this notion*, as you have already
-already installed packages from the CRAN for example ! You also know that it is the most standard way in `r fontawesome::fa("r-project")` to distribute code and make it available.
+already installed packages from the CRAN for example! You also know that it is the most standard way in `r fontawesome::fa("r-project")` to distribute code and make it available.
 We will show you that the package is also an excellent tool for developing code.
 
 
@@ -47,15 +47,15 @@ To take this course, you will need to have the following softwares installed:
   - a *C++ compiler* (such as `gcc` or `clang` - native on UNIX systems, 
 	for Windows users we recommend installing 
 	[Rtools](https://cran.r-project.org/bin/windows/Rtools/), for 
-	Mac users it may be necessary to install the macOS tool chain as detailed [here](https://mac.r-project.org/tools/)
+	Mac users it may be necessary to install the macOS tool chain as detailed [here](https://mac.r-project.org/tools/))
 
   - the following `r fontawesome::fa("r-project")` packages: `devtools`, `future.apply`, `microbenchmark`, `mvtnorm`, `profvis`, `Rcpp`, `RcppArmadillo`, `roxygen2`, `testthat`, `usethis`
 
   - the software [*git*](https://git-scm.com/) which can be installed following instructions from [*Happy Git With R* by Jennifer Bryan](https://happygitwithr.com/install-git.html)
   
-In addition, you will need an active internet connection (e.g. through *eduroam*)
+In addition, you will need an active internet connection (e.g. through *eduroam*).
 
-**NB:** In case you have not the sufficient admin rights on your computer to install some of those tools, you can instead use the service [Posit Cloud](https://posit.cloud/) offered Posit (the company developing *RStudio*) signing up for their free plan. This will give you access to a remote *RStudio* session with all the necessary softwares available, leaving you only with the above list of packages to install.
+**NB:** In case you have not the sufficient admin rights on your computer to install some of those tools, you can instead use the service [Posit Cloud](https://posit.cloud/) offered by Posit (the company developing *RStudio*) signing up for their free plan. This will give you access to a remote *RStudio* session with all the necessary softwares available, leaving you only with the above list of packages to install.
 
 
 ## Prerequisites {-}

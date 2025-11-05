@@ -1,7 +1,7 @@
 
 # Building an `r fontawesome::fa("r-project")` package
 
-Here we present how to efficiently create and build a package using *RStudio* IDE, and the `devtools` and `usethis` packages.
+Here we present how to efficiently create and build a package using *RStudio* IDE, the `devtools` and `usethis` packages.
 
 More details are provided in the reference material on this subject: the book [*R packages*](https://r-pkgs.org/)[^1] by Hadley Wickham & Jennifer Bryan, freely available online.
 
@@ -13,17 +13,17 @@ More details are provided in the reference material on this subject: the book [*
 
 A simple way, built into *RStudio*, to **initialize a package** is to follow those steps:
 
-> `r emoji::emoji("point_right")` **Your turn** (already)!
+> `r emoji::emoji("point_right")` ***Your turn*** (already)!
 >
->  1. create a new project (top left `File` drop down menu in *RStudio*)
+>  1. Create a new project (top left `File` drop down menu in *RStudio*)
 >  
->  2. choose "*New Directory*"
+>  2. Choose "*New Directory*"
 >  
->  3. choose "*R package using devtools*" (if it is not available, choose "*R package*", the difference being that with "*R package*" you will have to delete unnecessary files that are automatically created but not useful)
+>  3. Choose "*R package using devtools*" (if it is not available, choose "*R package*", the difference being that with "*R package*" you will have to delete unnecessary files that are automatically created but not useful)
 >  
->  4. give a name to your package, for example `mypkgr`.
+>  4. Give a name to your package, for example `mypkgr`.
   
-**NB:** if you a using [Posit Cloud](https://posit.cloud/) and not your local computer, you need to rather execute the following command into the `r fontawesome::fa("r-project")` console: `usethis::create_package(".")` and accept the proposed overwrites.
+**NB:** if you are using [Posit Cloud](https://posit.cloud/) and not your local computer, you need to rather execute the following command into the `r fontawesome::fa("r-project")` console: `usethis::create_package("mypkgr")` and accept the potential proposed overwrites.
   
 From that, we get the **minimal structure for an** `r fontawesome::fa("r-project")` package, namely:
 
@@ -38,7 +38,7 @@ From that, we get the **minimal structure for an** `r fontawesome::fa("r-project
 
   - **.gitignore**, relative to `git`, a version control tool that we will see in detail in the following section on `git` & *GitHub*
   
-  - **mypkgr.Rproj** which is a specific file of *RStudio*, and allows to define the characteristics and preferences of the project we just created
+  - **mypkgr.Rproj** which is a specific file of *RStudio* and allows to define the characteristics and preferences of the project we just created
   
   - **.Rbuildignore** which allows to ignore some files when we build the package down the road (for example, the `mypkgr.Rproj` file should not be included in the package)
   
@@ -46,16 +46,16 @@ From that, we get the **minimal structure for an** `r fontawesome::fa("r-project
 
 ## Adding a function: common theme example
 
-We first invite you to code the following function, which we will use throughout the course:
+We first invite you to code the following function, which we will use throughout the course.
 
-We want to compute the value of the density of a multivariate normal distribution on $\mathbb{R}^p$ at $n$ points. Our function must be applicable for any multivariate normal distribution (i.e. any mean vector $\boldsymbol\mu$ in $\mathbb{R}^p$ and variance-covariance matrix $\boldsymbol\Sigma$ of order $p$), and we wish to compute all the values of the density evaluated at the $n$ points $\mathbf{x}$ in a single call of the function.
+We want to compute the value of the density of a multivariate normal distribution on $\mathbb{R}^p$ at $n$ points. Our function must be applicable for any multivariate normal distribution (i.e. any mean vector $\boldsymbol\mu$ in $\mathbb{R}^p$ and variance-covariance matrix $\boldsymbol\Sigma$ of size $p$) and we wish to compute all the values of the density (eventually in log-scale) evaluated at the $n$ points $\mathbf{x}$ in a single call of the function.
 
 As a reminder, the density function for a multivariate Gaussian distribution is:
 $$\displaystyle (2\pi )^{-p/2}\det({\boldsymbol {\Sigma }})^{-1/2}\,\exp \left(-{\frac {1}{2}}(\mathbf {x} -{\boldsymbol {\mu }})^{\mathsf {T}}{\boldsymbol {\Sigma }}^{-1}(\mathbf {x} -{\boldsymbol {\mu }})\right)$$
 
 So you need to create a function `mvnpdf()` in a file named `mvnpdf.R` in the `R/` folder of your package, which :
 
-  - takes as arguments:
+  - Takes as arguments:
     
       - `x` a matrix, with $n$ columns (the observations) and $p$ rows
       
@@ -65,13 +65,13 @@ So you need to create a function `mvnpdf()` in a file named `mvnpdf.R` in the `R
       
       - `Log` a logical parameter, with default value to `TRUE`.
       
-  - returns a list containing the matrix `x`, and a vector of length $n$ of the multivariate normal distribution density values at those points.
+  - Returns a list containing the matrix `x`, and a vector of length $n$ of the multivariate normal distribution density values at those points.
 
-> `r emoji::emoji("point_right")` ***Your turn !***  
+> `r emoji::emoji("point_right")` ***Your turn!***  
 
 
 
-Here is a function proposal that you can download [here](https://endevr.borishejblum.science/endeavR_files/mvnpdfRAW.R). `r emoji::emoji("warning")` *WARNING !* if you click too quickly on this link, it will invalidate your participation in the class !
+Here is a function proposal that you can download [here](https://endevr.borishejblum.science/endeavR_files/mvnpdfRAW.R). `r emoji::emoji("warning")` *WARNING!* if you click too quickly on this link, it will invalidate your participation in the class!
 
 For advice on writing code, see the [R code](https://r-pkgs.org/code.html) section from Wickham & Bryan *R packages* (2023) by Wickham & Bryan[^1].
 
@@ -81,15 +81,15 @@ For advice on writing code, see the [R code](https://r-pkgs.org/code.html) secti
 
 It is important to properly document your code. Every project has at least two developers:
 
-  - yourself,
+  - yourself
     
-  - and yourself in 6 months.
+  - yourself in 6 months.
   
 For the sake of your future self, do yourself a favor and take the time to document your code !
 
 We strongly advise you to use the `roxygen2` package to document your packages. The main advantage being to have the help of a function in the same file as the code defining this function.
 
-> `r emoji::emoji("point_right")` ***Your turn !***  
+> `r emoji::emoji("point_right")` ***Your turn!***  
 >
   1. Start by inserting the skeleton of the helper with "*Insert Roxygen Skeleton*" located in the "*Code*" menu or the *Magic Wand* sub-menu in the script window.
 >  
@@ -229,7 +229,7 @@ plot.mvnpdf <- function(x, ...) {
 }
 ```
 
-`r emoji::emoji("warning")` *WARNING !* In order for this *S3 method* to do what we want it to do when we apply it to the result of our function `mvnpdf()`, we have to declare that `mvnpdf()` returns a result of class `mvnpdf`.
+`r emoji::emoji("warning")` *WARNING!* In order for this *S3 method* to do what we want it to do when we apply it to the result of our function `mvnpdf()`, we have to declare that `mvnpdf()` returns a result of class `mvnpdf`.
 
 Test this function, by executing the example.\
 *Don't forget to re-install the package ("Install" or `Ctrl+Shift+B`)*.

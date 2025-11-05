@@ -37,33 +37,29 @@ The principle of version control is to record the successive changes made to fil
 
 > `r emoji::emoji("point_right")` ***Your turn !***  
 > 
-  1. Start by enabling `git` from the "*Git/SVN*" tab of "*Project Options*" located in the "Tools" menu and follow the instructions. You can also run `usethis::use_git()` in the `r fontawesome::fa("r-project")` console alternatively.
->  
-  2. From the "*Git*" tab that now appears next to the "*Build*" tab, 
-  register the current state of your package by making your first commit:
- >     
-      - 2a. Select the files to track (do not select the `.Rproj` file)
- >     
-      - 2b. write an informative message (for your collaborators -- this includes your future self)
- >     
-      - 2c. click on "Commit"
- >     
-      - 2d. if this is the first time you are using git on your computer, you might be prompted with an error that looks something like that:
- >      ```{git, eval=FALSE}
-         *** Please tell me who you are.
-
-         Run
-      
-         git config --global user.email "you@example.com"
-         git config --global user.name "Your Name"
-        ```
->      To solve this, run the following command into the `r fontawesome::fa("r-project")` console with **your user.name** and **your email** filled in: `usethis::use_git_config(user.name = "FirstName LastName", user.email = "your@email.com")`
+> 1. Start by enabling `git` from the "*Git/SVN*" tab of "*Project Options*" located in the "Tools" menu and follow the instructions. You can also run `usethis::use_git()` in the `r fontawesome::fa("r-project")` console alternatively.
+> 
+> 2. From the "*Git*" tab that now appears next to the "*Build*" tab, register the current state of your package by making your first commit:
+> 
+>     - 2a. Select the files to track (do not select the `.Rproj` file)
+>     - 2b. write an informative message (for your collaborators -- this includes your future self)
+>     - 2c. click on "Commit"
+>     - 2d. if this is the first time you are using git on your computer, you might be prompted with an error that looks something like that:
+>       ```
+>       *** Please tell me who you are.
+>       
+>       Run
+>       
+>       git config --global user.email "you@example.com"
+>       git config --global user.name "Your Name"
+>       ```
+>       To solve this, run the following command into the `r fontawesome::fa("r-project")` console with **your user.name** and **your email** filled in: `usethis::use_git_config(user.name = "FirstName LastName", user.email = "your@email.com")`
+> 
 > 3. Add a "*.Rproj" line to the ".gitignore" file and make a new commit
-> 4. Visualize the changes and their history using the visualization tools 
-  "Diff" and "History" tools accessible from the "Git" tab
+> 
+> 4. Visualize the changes and their history using the visualization tools "Diff" and "History" tools accessible from the "Git" tab
   
 
-<!-- AJOUTER usethis::use_git_config(user.name = "Jane", user.email = "jane@example.org") pour ceux qui n'ont jamais utiliser git -->
 
   
 ![Artwork CC-BY Allison Horst](endeavR_files/github_fall.png){width=100%}
