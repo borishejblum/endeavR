@@ -3,6 +3,6 @@
 
  1. **MAKE PACKAGES!**
  
- 2. use `git`, at least locally for yourself
+ 2. Use `git`, at least locally for yourself
  
- 3. **if needed** (i.e. after optimization of `r fontawesome::fa("r-project")` code itself), do not be afraid of using `Rcpp` and/or of parallelizing your code
+ 3. **If needed** (i.e. after optimization of `r fontawesome::fa("r-project")` code itself), do not be afraid of using `Rcpp` and/or parallelize your code

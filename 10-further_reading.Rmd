@@ -9,7 +9,7 @@
     
     - the website [*R for Data Science*](https://r4ds.hadley.nz/) is also quite comprehensive and includes chapters on data management in `r fontawesome::fa("r-project")`, but also on  structures in `r fontawesome::fa("r-project")`, modeling, as well as elements on graphics and `Quarto`.
     
-  - the online book [Rcpp for everyone](https://teuder.github.io/rcpp4everyone_en/) by Masaki E. Tsuda is also very good. 
+  - The online book [Rcpp for everyone](https://teuder.github.io/rcpp4everyone_en/) by Masaki E. Tsuda is also very good. 
 
 
 

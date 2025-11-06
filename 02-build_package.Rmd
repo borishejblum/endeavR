@@ -8,7 +8,6 @@ More details are provided in the reference material on this subject: the book [*
 [^1]: *R Packages* (2^nd^ Edition) by Hadley Wickham, Jennifer Bryan. O'Reilly, 2023. ISBN: 9781098134945. [https://r-pkgs.org/](https://r-pkgs.org/)
 
 
-
 ## Initializing a package
 
 A simple way, built into *RStudio*, to **initialize a package** is to follow those steps:
@@ -41,7 +40,6 @@ From that, we get the **minimal structure for an** `r fontawesome::fa("r-project
   - **mypkgr.Rproj** which is a specific file of *RStudio* and allows to define the characteristics and preferences of the project we just created
   
   - **.Rbuildignore** which allows to ignore some files when we build the package down the road (for example, the `mypkgr.Rproj` file should not be included in the package)
-  
 
 
 ## Adding a function: common theme example
@@ -65,16 +63,13 @@ So you need to create a function `mvnpdf()` in a file named `mvnpdf.R` in the `R
       
       - `Log` a logical parameter, with default value to `TRUE`.
       
-  - Returns a list containing the matrix `x`, and a vector of length $n$ of the multivariate normal distribution density values at those points.
+  - Returns a list containing the matrix `x`, and a vector of length $n$ of the multivariate normal distribution density values at those points (eventually in log-scale).
 
-> `r emoji::emoji("point_right")` ***Your turn!***  
-
-
+> `r emoji::emoji("point_right")` ***Your turn!***
 
 Here is a function proposal that you can download [here](https://endevr.borishejblum.science/endeavR_files/mvnpdfRAW.R). `r emoji::emoji("warning")` *WARNING!* if you click too quickly on this link, it will invalidate your participation in the class!
 
-For advice on writing code, see the [R code](https://r-pkgs.org/code.html) section from Wickham & Bryan *R packages* (2023) by Wickham & Bryan[^1].
-
+For advice on writing code, see the [R code](https://r-pkgs.org/code.html) section from Wickham & Bryan *R packages* (2023) by Wickham & Bryan.
 
 
 ## Documenting a function
@@ -85,13 +80,13 @@ It is important to properly document your code. Every project has at least two d
     
   - yourself in 6 months.
   
-For the sake of your future self, do yourself a favor and take the time to document your code !
+For the sake of your future self, do yourself a favor and take the time to document your code!
 
 We strongly advise you to use the `roxygen2` package to document your packages. The main advantage being to have the help of a function in the same file as the code defining this function.
 
 > `r emoji::emoji("point_right")` ***Your turn!***  
 >
-  1. Start by inserting the skeleton of the helper with "*Insert Roxygen Skeleton*" located in the "*Code*" menu or the *Magic Wand* sub-menu in the script window.
+  1. Start by inserting the skeleton of the help with "*Insert Roxygen Skeleton*" located in the "*Code*" menu or the *Magic Wand* sub-menu in the script window.
 >  
   2. Complete the documentation by filling in:
 >
@@ -107,7 +102,7 @@ We strongly advise you to use the `roxygen2` package to document your packages. 
  >     
   3. Generate the documentation using "Document" in the "More" menu of the "Build" tab (or alternatively run `devtools::document()` or use `Ctrl+Shift+D`). The effect of this command is multiple:
 >
->      - a `man` folder is created and inside it, a `mvnpdf.Rd` file contains the help information about the function
+>      - a `man` folder is created and inside it, a `mvnpdf.Rd` file contains the help information about the function `mvnpdf()`
 >      
 >      - the `NAMESPACE` file is modified
       
@@ -130,7 +125,7 @@ The generated help page will then be accessible, once the package is installed, 
 
 ## Interactively test the package
 
-To test the package, you have to load it in `r fontawesome::fa("r-project")` using "*Load All*" (or `Ctrl+Shift+L`) in the "*More*" menu from the "*Build*" tab, or alternatively `devtools::load_all()`).
+To test the package, you have to load it in `r fontawesome::fa("r-project")` using "Load All" (`Ctrl+Shift+L`) in the "More" menu from the "Build" tab, or alternatively `devtools::load_all()`.
 
 You can then use your package directly in `r fontawesome::fa("r-project")`: look at the function help page with `?mvnpdf` and for example execute the commands given in the example section of this help page.
 
@@ -149,8 +144,16 @@ During code development, you can thus:
   - And so on...
 
 
+## Install your package
 
-## *Automatically* test your package
+For the moment, the package exists only in the environment associated with the *RStudio* project we have created. To be able to use it anywhere in `r fontawesome::fa("r-project")` (on your computer), you have to install it (like a CRAN package for example).
+
+To do this, click on "Install" (`Ctrl+Shift+B`) from the "Build" tab, or alternatively you can run `devtools::install()`.
+
+And finally, you can configure *RStudio*'s behavior so that at the time of installation, it simultaneously documents the package: go to the "More" menu from the "Build" tab, then "Configure Build Tools...". Then click on "Configure" next to "Generate documentation with Roxygen", and check the box "Install and Restart".
+
+
+## Automatically test your package
 
 To initialize automatic testing capabilities in your package, execute the following command:
 
@@ -175,8 +178,7 @@ test_that("correct results for bivariate gaussian", {
 })
 ```
 
-
-To execute these tests, you can click on "Test package" (`Ctrl+Shift+T`) in the "More" menu from the "Build" tab, or run `devtools::test()`
+To execute these tests, you can click on "Test package" (`Ctrl+Shift+T`) in the "More" menu from the "Build" tab, or run `devtools::test()`.
 
 The advantage of these automatic tests is that they will be run every time you *check* the package (see just below).
 
@@ -184,24 +186,13 @@ A good practice is to add a unit test each time a bug is identified and fixed,
 so that we can immediately identify and prevent the same error from happening again in the future.
 
 
-
-## *Checking* your package
+## Check your package
 
 Running a *check* means ensuring that everything in your package is correct and will work as expected, and that it can be installed properly under various OS. "Passing `R CMD CHECK`" is **mandatory** for successfully uploading your package on CRAN.
 
-To perform `R CMD CHECK` on your package, you can click on "*Check*" (`Ctrl+Shift+E`) from the "*Build*" tab, or run `devtools::check()`.
+To perform `R CMD CHECK` on your package, you can click on "Check" (`Ctrl+Shift+E`) from the "Build" tab, or run `devtools::check()`.
 
-During the *check*, the automated unit tests that we have developed previously are executed. This is the advantage of having written these tests, we don't need to worry about it, simply react and adjust the code when errors are returned and flagged.
-
-
-## Install your package
-
-For the moment, the package exists only in the environment associated with the *RStudio* project we have created. To be able to use it anywhere (on your computer) in `r fontawesome::fa("r-project")` in a general way, you have to install it (like a CRAN package for example).
-
-To do this, click on "Install" (`Ctrl+Shift+B`) from the "Build" tab, or alternatively you can run `devtools::install()`.
-
-And finally, you can configure *RStudio*'s behavior so that at the time of installation, it simultaneously documents the package: go to the "*More*" menu from the "*Build*" tab, then "*Configure Build Tools...*". Then click on "*Configure*" next to "*Generate documentation with Roxygen*", and check the box "*Install and Restart*".
-
+During the *check*, the automated unit tests that we have developed previously are executed. This is the advantage of having written these tests, we don't need to worry about it, but simply react and adjust the code when errors are returned and flagged.
 
 
 
@@ -214,7 +205,7 @@ Here is an example of a `plot()` method that we can add to our package:
 ```{r, eval=FALSE}
 #' Plot of the mvnpdf function
 #'
-#' @param x an object of class \code{mvnpdf} resulting from a call of
+#' @param x an object of class \code{mvnpdf} resulting from a call of the
 #' \code{mnvpdf()} function.
 #' @param ... graphical parameters passed to \code{plot()} function.
 #'
@@ -241,5 +232,5 @@ Look at the contents of the `man` folder and the changes that have been made to 
 
 ## Appendix 1.2: submit one's package on [CRAN](https://cran.r-project.org/web/packages/available_packages_by_name.html) {-}
 
-Run the two following commands: `devtools::check()` followed `devtools::submit_cran()`.
-For more details, see Wickham & Bryan's recommended pipeline in their book [*R packages*](https://r-pkgs.org/release.html#release-process)
+Run the two following commands: `devtools::release()`.
+For more details, see Wickham & Bryan's recommended pipeline in their book [*R packages*](https://r-pkgs.org/release.html#release-process).

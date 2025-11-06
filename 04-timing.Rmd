@@ -3,9 +3,9 @@
 
 The first step before optimizing a code is to measure its execution time, in order to compare timings between different implementations.
 
-For this section and the following we refer to the book [*Advanced R*](https://adv-r.hadley.nz/) by Hadley Wickham [^2], freely available online.
+For this section and the following we refer to the book [*Advanced R*](https://adv-r.hadley.nz/) by Hadley Wickham [^3], freely available online.
 
-[^2]: *Advanced R* (2^nd^ Edition) by Hadley Wickham. The R series, CRC press, 2019. ISBN: 9780815384571 [https://adv-r.hadley.nz/](https://adv-r.hadley.nz/)
+[^3]: *Advanced R* (2^nd^ Edition) by Hadley Wickham. The R series, CRC press, 2019. ISBN: 9780815384571 [https://adv-r.hadley.nz/](https://adv-r.hadley.nz/)
  
 ## Measuring execution times with `system.time()`
 
@@ -29,13 +29,13 @@ obs <- rep(1.96, 2)
 system.time(mvtnorm::dmvnorm(obs))
 ```
 
-We could imagine that we need to increase the complexity of our calculation to be able to compare them, but there is actually a better way: use the `microbenchmark` package !
+We could imagine that we need to increase the complexity of our calculation to be able to compare them, but there is actually a better way: the use of the `microbenchmark` package!
 
 
 
 ## Compare execution times with `microbenchmark()`
 
-As its name indicates, this package allows to compare execution times even when they are very fast. Moreover, each benchmarked expression will be repeatedly evaluated a certain number of times, thus stabilizing its timing estimations.
+As its name indicates, this package allows to compare execution times even when they are very fast. Moreover, each benchmarked expression will be repeatedly evaluated several times, thus stabilizing its timing estimations.
 
 ```{r}
 library(microbenchmark)
