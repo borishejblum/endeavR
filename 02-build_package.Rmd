@@ -1,5 +1,5 @@
 
-# Building an `r fontawesome::fa("r-project")` package
+# Building an R package
 
 Here we present how to efficiently create and build a package using *RStudio* IDE, the `devtools` and `usethis` packages.
 

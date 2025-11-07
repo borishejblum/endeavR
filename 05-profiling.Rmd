@@ -1,5 +1,5 @@
 
-# Profiling code
+# Profiling the code
 
 ```{r, echo=FALSE}
 library(mypkgr)
@@ -7,24 +7,24 @@ library(microbenchmark)
 library(ggplot2)
 ```
 
-*Profiling* is about determining which part of the code take the most time to compute (and also memory-wise). Once you have found the block of code that takes the longest time to execute, our goal is only to optimize that small part of the code.
+*Profiling* is about determining which part of the code takes the most time to compute (and also memory-wise). Once we have found the block of code that takes the longest time to execute, our goal is only to optimize that small part of the code.
 
-To get a *profiling* of the code below, select the lines of code of interest and go to the "*Profile*" menu then "*Profile Selected Lines*". It uses the package `profvis`, and in particular its `profvis()` function. 
+To get a *profiling* of the code below, select the lines of code of interest and go to the "*Profile*" menu then "*Profile Selected Lines*". It uses the `profvis()` function of the package `profvis`. 
 
 ```{r, eval=FALSE}
 n <- 10e4
 pdfval <- mvnpdf(x=matrix(1.96, nrow = 2, ncol = n), Log=FALSE)
 ```
+
 ```{r, echo=FALSE}
 n <- 10e4
 profvis::profvis(mvnpdf(x=matrix(1.96, nrow = 2, ncol = n), Log=FALSE))
 ```
 
-*OK, OK, we get it !* Concatenating a vector as you go in a loop is really not a good idea.
+*OK, OK, we get it!* Concatenating a vector as you go in a loop is really not a good idea in `r fontawesome::fa("r-project")`.
 
 
-
-## Comparison with an improved implementtation of `mnvpdf()`.
+## Comparison with an improved implementation of `mnvpdf()`.
 
 Consider a new version of `mvnpdf()`, called `mvnpdfsmart()`. Download the [file](https://endeavr.borishejblum.science/endeavR_files/mvnpdfsmart.R), and then include it in the package.
 
@@ -34,6 +34,7 @@ Now profile the following command:
 n <- 10e4
 pdfval <- mvnpdfsmart(x=matrix(1.96, nrow = 2, ncol = n), Log=FALSE)
 ```
+
 ```{r, echo=FALSE}
 n <- 10e4
 profvis::profvis(mvnpdfsmart(x=matrix(1.96, nrow = 2, ncol = n), Log=FALSE))
@@ -151,4 +152,4 @@ profvis::profvis(mvtnorm::dmvnorm(matrix(1.96, nrow = n, ncol = 2)))
 profvis::profvis(mypkgr::my_dmvnorm(matrix(1.96, nrow = n, ncol = 2)))
 ```
 
-You can download the `my_dmvnorm()` function [here]([here](https://github.com/borishejblum/mypkgr/blob/1df7c6ba37df4ec7406167953beea917757d0481/R/my_dmvnorm.R) and include it in your package, in order to have the source code available in the profile result.
+You can download the `my_dmvnorm()` function [here](https://github.com/borishejblum/mypkgr/blob/1df7c6ba37df4ec7406167953beea917757d0481/R/my_dmvnorm.R) and include it in your package, in order to have the source code available in the profiling result.
