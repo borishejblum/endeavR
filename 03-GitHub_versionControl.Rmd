@@ -95,7 +95,10 @@ On the other hand, the temptation to have a *"clean" and tidy* change-history is
 > `r emoji::emoji("point_right")` ***Your turn !***
 >
 > 1. Go to [https://github.com/](https://github.com/) and create a *GitHub* account (if you hesitate, a common convention is to use your *firstnamelastname* as username)
-> 2. Run `usethis::use_github()` into the `r fontawesome::fa("r-project")` console and follow the instructions.
+> 2. Follow the instruction from [chapters 9 and 10 in *Happy Git With R* by Jenny Brian ](https://happygitwithr.com/connect-intro) to store your *GitHub* authentication within *RStudio*. The general advice is to use. 
+>     - `https` and a *Private Access Token* with `usethis::create_github_token()` if on `Windows` or `MacOS` [`r emoji::emoji("globe_with_meridians")` *chapter 9*](https://happygitwithr.com/https-pat)
+>     - to use `ssh` with a *pair of private and public keys* if on `Linux` [`r emoji::emoji("globe_with_meridians")` *chapter 10*](https://happygitwithr.com/ssh-keys)
+> 2. Then run `usethis::use_github()` into the `r fontawesome::fa("r-project")` console and follow the instructions.
 > 3. Add a `README.Rmd` file to your package in order to have a nice home page on *GitHub*:
 >    - 3a. In *RStudio*, run the command `usethis::use_readme_rmd()`
 >    - 3b. using the "*Diff*" tool in the "*Git*" tab of *RStudio*, review the changes made by the previous command
