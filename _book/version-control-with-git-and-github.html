@@ -218,11 +218,11 @@ git config --global user.name "Your Name"</code></pre>
 <p>Let’s take the following example: the developer <span class="math inline">\(D_1\)</span> and the developer <span class="math inline">\(D_2\)</span> have both <em>pulled</em> the version v0.1 of the code at time <span class="math inline">\(t\)</span> on their respective machines. They each work independently to make changes to the code. When <em>pushing</em> his/her changes, developer <span class="math inline">\(D_2\)</span> receives an error message:</p>
 <p><code>"Sync Error.</code><br><code>Please resolve all conflicted files, commit, then try syncing again."</code></p>
 <p>Each file that is a source of conflicts has then been automatically edited with:</p>
-<pre class="git"><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-local code
-=======
-online code
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; remote</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb8-1"><a href="version-control-with-git-and-github.html#cb8-1" tabindex="-1"></a><span class="op">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
+<span id="cb8-2"><a href="version-control-with-git-and-github.html#cb8-2" tabindex="-1"></a><span class="bu">local</span> <span class="va">code</span></span>
+<span id="cb8-3"><a href="version-control-with-git-and-github.html#cb8-3" tabindex="-1"></a><span class="ex">=======</span></span>
+<span id="cb8-4"><a href="version-control-with-git-and-github.html#cb8-4" tabindex="-1"></a><span class="ex">online</span> code</span>
+<span id="cb8-5"><a href="version-control-with-git-and-github.html#cb8-5" tabindex="-1"></a><span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> remote</span></code></pre></div>
 <p>In order to solve the conflict, you have to manually and carefully edit each file one by one, choosing whether to keep the local or the online version of the code, before you can <em>commit</em> again, and finally successfully <em>push</em> your changes online.</p>
 <blockquote>
 <p>👉 <strong><em>Your turn !</em></strong></p>

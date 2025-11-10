@@ -151,7 +151,7 @@ Let's take the following example: the developer $D_1$ and the developer $D_2$ ha
 `Please resolve all conflicted files, commit, then try syncing again."`
 
 Each file that is a source of conflicts has then been automatically edited with:
-```{git, eval = FALSE}
+```{sh, eval = FALSE}
 <<<<<<< HEAD
 local code
 =======
