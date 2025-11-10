@@ -67,7 +67,7 @@ So you need to create a function `mvnpdf()` in a file named `mvnpdf.R` in the `R
 
 > `r emoji::emoji("point_right")` ***Your turn!***
 
-Here is a function proposal that you can download [here](https://endevr.borishejblum.science/endeavR_files/mvnpdfRAW.R). `r emoji::emoji("warning")` *WARNING!* if you click too quickly on this link, it will invalidate your participation in the class!
+Here is a function proposal that you can download [here](https://endeavr.borishejblum.science/endeavR_files/mvnpdfRAW.R). `r emoji::emoji("warning")` *WARNING!* if you click too quickly on this link, it will invalidate your participation in the class!
 
 For advice on writing code, see the [R code](https://r-pkgs.org/code.html) section from Wickham & Bryan *R packages* (2023) by Wickham & Bryan.
 
