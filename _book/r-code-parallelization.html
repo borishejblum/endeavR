@@ -48,13 +48,13 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Course syllabus</a></li>
-<li><a class="" href="building-an-package.html"><span class="header-section-number">1</span> Building an  package</a></li>
+<li><a class="" href="building-an-r-package.html"><span class="header-section-number">1</span> Building an R package</a></li>
 <li><a class="" href="version-control-with-git-and-github.html"><span class="header-section-number">2</span> Version control with git and GitHub</a></li>
 <li><a class="" href="measuring-and-comparing-execution-times.html"><span class="header-section-number">3</span> Measuring and comparing execution times</a></li>
-<li><a class="" href="profiling-code.html"><span class="header-section-number">4</span> Profiling code</a></li>
+<li><a class="" href="profiling-the-code.html"><span class="header-section-number">4</span> Profiling the code</a></li>
 <li><a class="" href="rcpp-or-how-to-easily-embed-c-code-into-a-package.html"><span class="header-section-number">5</span> Rcpp or how to easily embed C++ code into a  package</a></li>
 <li><a class="active" href="r-code-parallelization.html"><span class="header-section-number">6</span> R code Parallelization</a></li>
-<li><a class="" href="take-home-messages.html"><span class="header-section-number">7</span> Take-home message(s)</a></li>
+<li><a class="" href="take-home-message.html"><span class="header-section-number">7</span> Take-home message</a></li>
 <li><a class="" href="further-reading.html">Further reading</a></li>
 </ul>
 
@@ -71,7 +71,7 @@
 <h2>
 <span class="header-section-number">6.1</span> Introduction to parallel execution in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg><a class="anchor" aria-label="anchor" href="#introduction-to-parallel-execution-in"><i class="fas fa-link"></i></a>
 </h2>
-<p>Apart from optimizing the code and the algorithms, another way to get a high performing code is to take advantage of the parallel architectures of modern computers. The goal is then to <strong>parallelize</strong> one’s code in order to perform simultaneous operations on distinct parts of the same problem, using different computing cores. This does not reduce the total computation time needed, but the set of operations is executed faster, resulting in overall user speed-up.</p>
+<p>Apart from optimizing the code and the algorithms, another way to get a high performing code is to take advantage of the parallel architectures of modern computers. The goal is then to <strong>parallelize</strong> a code in order to perform simultaneous operations on distinct parts of the same problem, using different computing cores. This does not reduce the total computation time needed, but the set of operations is executed faster, resulting in an overall user speed-up.</p>
 <p>There is a significant number of algorithms that are so-called “<em>embarrassingly parallel</em>”, i.e. whose computations can be broken down into several independent sub-computations. In statistics, it is often easy and straightforward to parallelize according to different observations or different dimensions. Typically, these are operations that can be written in the form of a loop whose operations are independent from one iteration to the next.</p>
 <p><strong>The necessary operations to execute code in parallel are as follows:</strong></p>
 <ol style="list-style-type: decimal">
@@ -82,20 +82,20 @@
 <li><p>Collect the results from the different workers</p></li>
 <li><p>Stop the worker processes</p></li>
 </ol>
-<p>Depending on the platform, several communication protocols are available between the cores. Under UNIX systems, the <em>Fork</em> protocol is the most used (it has the benefit of sharing memory), but it is not available under Windows where the <em>PSOCK</em> protocol is used instead (with duplicated memory). Finally, for distributed computing architecture where the cores are not necessarily on the same physical processor, the <em>MPI</em> protocol is generally used. The advantage of the <code>future</code> and <code>future.apply</code> package is that the same code can be executed whatever the hardware configuration.</p>
-<p>Since <code>R 2.14.0</code>, the <code>parallel</code> package is directly included in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> and allows to start and stop a cluster of several worker processes (step 1 and 6). In addition to the <code>parallel</code> package, we will use the <code>future</code> package which allows to manage the worker processes and the communication and articulation with the <code>future.apply</code> package, which in turn allows to manage the dialogue with the workers (sending, receiving and collecting the results – steps 2, 3, 4 and 5).</p>
-<p><strong>NB: </strong> the free plan on <em>Posit Cloud</em> only includes 1 core.</p>
+<p>Depending on the platform, several communication protocols are available between cores. Under UNIX systems, the <em>Fork</em> protocol is the most used (it has the benefit of sharing memory), but it is not available under Windows where the <em>PSOCK</em> protocol is used instead (with duplicated memory). Finally, for distributed computing architecture where the cores are not necessarily on the same physical processor, the <em>MPI</em> protocol is generally used. The advantage of the <code>future</code> and <code>future.apply</code> package is that the same code can be executed whatever the hardware configuration.</p>
+<p>In <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> the <code>parallel</code> package allows to start and stop a cluster of several worker processes (step 1 and 6). In addition to the <code>parallel</code> package, we will use the <code>future</code> package which allows to manage the worker processes and the communication and articulation with the <code>future.apply</code> package, which in turn allows to manage the dialogue with the workers (sending, receiving and collecting the results – steps 2, 3, 4 and 5).</p>
+<p><strong>NB:</strong> The free plan on <em>Posit Cloud</em> only includes 1 core.</p>
 </div>
 <div id="first-parallel-function" class="section level2" number="6.2">
 <h2>
 <span class="header-section-number">6.2</span> First <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> parallel function<a class="anchor" aria-label="anchor" href="#first-parallel-function"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
-<p>👉 <strong><em>Your turn !</em></strong></p>
+<p>👉 <strong><em>Your turn!</em></strong></p>
 <p>Start by writing a simple function that computes the logarithm of <span class="math inline">\(n\)</span> numbers:</p>
 <ol style="list-style-type: decimal">
 <li><p>Determine how many cores are available on your computer with the function <code><a href="https://parallelly.futureverse.org/reference/availableCores.html">future::availableCores()</a></code> (under Linux, prefer <code>parallel::detectCores(logical=FALSE)</code> to avoid overthreading).</p></li>
-<li><p>Using the function <code>future::plan(multisession(workers = XX))</code>, declare a “<em>plan</em>” of parallel computations on your computer (taking care to <strong>always leave at least one core available</strong> to handle other processes).</p></li>
+<li><p>Using the function <code>future::plan(multisession(workers = XX))</code>, declare a “<em>plan</em>” of parallel computations on your computer (take care to <strong>always leave at least one core available</strong> to handle other processes).</p></li>
 <li><p>Using one of the <em>*apply</em> functions <code>future.apply::future_*apply()</code>, compute the log of <span class="math inline">\(n\)</span> numbers in parallel and concatenate the results into a vector.</p></li>
 <li><p>Compare the execution time with that of a sequential function on the first 100 integers, using the command :<br><code>microbenchmark(log_par(1:100), log_seq(1:100), times=10)</code></p></li>
 </ol>
@@ -104,7 +104,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/">microbenchmark</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://future.apply.futureverse.org">future.apply</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">log_seq</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<span><span class="va">log_seq</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># try this yourself (spoiler alert: it is quite long...):</span></span>
 <span>  <span class="co"># res &lt;- numeric(length(x))</span></span>
 <span>  <span class="co"># for(i in 1:length(x)){</span></span>
@@ -114,7 +114,7 @@
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="va">log_par</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<span><span class="va">log_par</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://future.apply.futureverse.org/reference/future_lapply.html">future_sapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
@@ -124,7 +124,7 @@
 <span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="fu"><a href="https://future.futureverse.org/reference/multisession.html">multisession</a></span><span class="op">(</span>workers <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">mb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span><span class="fu">log_par</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span>, <span class="fu">log_seq</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span>, times <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="endeavR_files/figure-html/unnamed-chunk-36-1.png" width="672"></div>
-<p>The parallel version runs much slower… Because in fact, if the individual tasks are too fast, <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> will spend more time communicating with the cores than doing the actual computations.</p>
+<p>The parallel version runs much slower… Indeed, since the individual tasks are too fast, <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> will spend more time communicating with the cores than doing the actual computations. Hence:</p>
 <p><strong>A loop iteration must be relatively long for parallel computing to provide a significant gain in computation time!</strong></p>
 <p>By increasing <span class="math inline">\(n\)</span>, we observe a reduction in the difference between the 2 implementations (the parallel computation time increases very slowly compared to the increase of the sequential function).</p>
 <!--**NB:** the iterators of the `itertools` package are very efficient to minimize the number of communications between cores, but can only be used when the code inside `future_*apply()` is vectorized (it is always possible to vectorize the code inside, for example with a function of type `apply`).-->
@@ -145,7 +145,7 @@
 <span><span class="op">}</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="fu">colmedian_apply</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## utilisateur     système      écoulé 
-##       3.019       0.029       3.054</code></pre>
+##       2.935       0.008       2.944</code></pre>
 <p>In reality, a (good) <code>for</code> loop is no slower – provided it is nicely programmed:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">colmedian_for</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
@@ -158,9 +158,9 @@
 <span><span class="op">}</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="fu">colmedian_for</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## utilisateur     système      écoulé 
-##       2.839       0.022       2.864</code></pre>
+##       2.678       0.002       2.681</code></pre>
 <blockquote>
-<p>👉 <strong><em>Your turn !</em></strong>
+<p>👉 <strong><em>Your turn!</em></strong>
 Try to further improve this computation time by parallelizing your code for each of the 100,000 variables. Is there a gain in computation time?</p>
 </blockquote>
 <!-- 2. Propose an alternative implementation using the `itertools::isplitIndices()` function which allows you to separate your data (the $n$ numbers) into as many groups (or batchs) as you have cores. Compare again the computation times.
@@ -243,7 +243,7 @@ iterators::nextElem(myiter)
 <p>To run your code (exactly the same code, this is one of the advantages of the <code>future*</code> family packages), you need to set up a “plan” of computations:</p>
 <ul>
 <li><p>On a computer (or a single computer server) under Unix (Linux, Mac OS), you can use <code>plan(multicore(workers = XX))</code> which is often more efficient. The <code>multisession</code> plan always works.</p></li>
-<li><p>on a HPC cluster (like CURTA in Bordeaux), we refer to the package <a href="https://cran.r-project.org/web/packages/future.batchtools/vignettes/future.batchtools.html"><code>future.batchtools</code></a></p></li>
+<li><p>On an HPC cluster (like CURTA in Bordeaux), we refer to the package <a href="https://cran.r-project.org/web/packages/future.batchtools/vignettes/future.batchtools.html"><code>future.batchtools</code></a></p></li>
 </ul>
 </div>
 </div>
@@ -252,7 +252,7 @@ iterators::nextElem(myiter)
 <span class="header-section-number">6.4</span> Parallelization in our common theme example<a class="anchor" aria-label="anchor" href="#parallelization-in-our-common-theme-example"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
-<p>👉 <strong><em>Your turn !</em></strong></p>
+<p>👉 <strong><em>Your turn!</em></strong></p>
 <ol style="list-style-type: decimal">
 <li><p>From the function <code>mvnpdfoptim()</code> and/or <code>mvnpdfsmart()</code>, propose an implementation parallelizing the computations on the observations (columns of <span class="math inline">\(x\)</span>)</p></li>
 <li><p>Compare the execution times for 10 000 observations</p></li>
@@ -297,7 +297,7 @@ iterators::nextElem(myiter)
 <div id="annexe-6.1-progress-bar" class="section level2 unnumbered">
 <h2>Annexe 6.1: Progress bar<a class="anchor" aria-label="anchor" href="#annexe-6.1-progress-bar"><i class="fas fa-link"></i></a>
 </h2>
-<p>package <code>pbapply</code></p>
+<p>The <code>pbapply</code> package allows to get a nice progress bar for parallelized <code>*apply</code> functions execution.</p>
 
 <!--
 # Miscelaneous
@@ -321,7 +321,7 @@ iterators::nextElem(myiter)
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="rcpp-or-how-to-easily-embed-c-code-into-a-package.html"><span class="header-section-number">5</span> Rcpp or how to easily embed C++ code into a  package</a></div>
-<div class="next"><a href="take-home-messages.html"><span class="header-section-number">7</span> Take-home message(s)</a></div>
+<div class="next"><a href="take-home-message.html"><span class="header-section-number">7</span> Take-home message</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -350,7 +350,7 @@ iterators::nextElem(myiter)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>endeav<svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg></strong>: <em>a course on code efficiency and software development with R</em>" was written by <strong><em>Robin Genuer</em></strong> <a href="https://robin.genuer.fr/">🌐</a> &amp; <strong><em>Boris Hejblum</em></strong> <a href="https://borishejblum.science/">🌐</a>. It was last built on 2025-11-05.</p>
+    <p>"<strong>endeav<svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg></strong>: <em>a course on code efficiency and software development with R</em>" was written by <strong><em>Robin Genuer</em></strong> <a href="https://robin.genuer.fr/">🌐</a> &amp; <strong><em>Boris Hejblum</em></strong> <a href="https://borishejblum.science/">🌐</a>. It was last built on 2025-11-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

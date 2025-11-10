@@ -1,11 +1,11 @@
-building-an-package
+building-an-r-package
 initializing-a-package
 adding-a-function-common-theme-example
 documenting-a-function
 interactively-test-the-package
-automatically-test-your-package
-checking-your-package
 install-your-package
+automatically-test-your-package
+check-your-package
 version-control-with-git-and-github
 principles-of-version-control
 git
@@ -28,8 +28,8 @@ additional-references
 measuring-and-comparing-execution-times
 measuring-execution-times-with-system.time
 compare-execution-times-with-microbenchmark
-profiling-code
-comparison-with-an-improved-implementtation-of-mnvpdf.
+profiling-the-code
+comparison-with-an-improved-implementation-of-mnvpdf.
 comparison-with-an-optimized-pure-implementation
 rcpp-or-how-to-easily-embed-c-code-into-a-package
 first-function-in-rcpp
@@ -41,4 +41,4 @@ efficient-parallelization
 other-plans-for-parallel-computations
 parallelization-in-our-common-theme-example
 conclusion
-take-home-messages
+take-home-message

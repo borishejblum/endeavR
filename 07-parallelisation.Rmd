@@ -2,7 +2,7 @@
 
 ## Introduction to parallel execution in `r fontawesome::fa("r-project")`
 
-Apart from optimizing the code and the algorithms, another way to get a high performing code is to take advantage of the parallel architectures of modern computers. The goal is then to **parallelize** one's code in order to perform simultaneous operations on distinct parts of the same problem, using different computing cores. This does not reduce the total computation time needed, but the set of operations is executed faster, resulting in overall user speed-up.
+Apart from optimizing the code and the algorithms, another way to get a high performing code is to take advantage of the parallel architectures of modern computers. The goal is then to **parallelize** a code in order to perform simultaneous operations on distinct parts of the same problem, using different computing cores. This does not reduce the total computation time needed, but the set of operations is executed faster, resulting in an overall user speed-up.
 
 There is a significant number of algorithms that are so-called "*embarrassingly parallel*", i.e. whose computations can be broken down into several independent sub-computations. In statistics, it is often easy and straightforward to parallelize according to different observations or different dimensions. Typically, these are operations that can be written in the form of a loop whose operations are independent from one iteration to the next.
 
@@ -21,22 +21,22 @@ There is a significant number of algorithms that are so-called "*embarrassingly 
   6. Stop the worker processes
 
 
-Depending on the platform, several communication protocols are available between the cores. Under UNIX systems, the *Fork* protocol is the most used (it has the benefit of sharing memory), but it is not available under Windows where the *PSOCK* protocol is used instead (with duplicated memory). Finally, for distributed computing architecture where the cores are not necessarily on the same physical processor, the *MPI* protocol is generally used. The advantage of the `future` and `future.apply` package is that the same code can be executed whatever the hardware configuration.
+Depending on the platform, several communication protocols are available between cores. Under UNIX systems, the *Fork* protocol is the most used (it has the benefit of sharing memory), but it is not available under Windows where the *PSOCK* protocol is used instead (with duplicated memory). Finally, for distributed computing architecture where the cores are not necessarily on the same physical processor, the *MPI* protocol is generally used. The advantage of the `future` and `future.apply` package is that the same code can be executed whatever the hardware configuration.
 
-Since `R 2.14.0`, the `parallel` package is directly included in `r fontawesome::fa("r-project")` and allows to start and stop a cluster of several worker processes (step 1 and 6). In addition to the `parallel` package, we will use the `future` package which allows to manage the worker processes and the communication and articulation with the `future.apply` package, which in turn allows to manage the dialogue with the workers (sending, receiving and collecting the results -- steps 2, 3, 4 and 5).
+In `r fontawesome::fa("r-project")` the `parallel` package allows to start and stop a cluster of several worker processes (step 1 and 6). In addition to the `parallel` package, we will use the `future` package which allows to manage the worker processes and the communication and articulation with the `future.apply` package, which in turn allows to manage the dialogue with the workers (sending, receiving and collecting the results -- steps 2, 3, 4 and 5).
 
 
-**NB: ** the free plan on *Posit Cloud* only includes 1 core.
+**NB:** The free plan on *Posit Cloud* only includes 1 core.
 
 ## First `r fontawesome::fa("r-project")` parallel function 
 
-> `r emoji::emoji("point_right")` ***Your turn !*** 
+> `r emoji::emoji("point_right")` ***Your turn!*** 
 >
 > Start by writing a simple function that computes the logarithm of $n$ numbers:
 >
 >  1. Determine how many cores are available on your computer with the function `future::availableCores()` (under Linux, prefer `parallel::detectCores(logical=FALSE)` to avoid overthreading).
 >
->  2. Using the function `future::plan(multisession(workers = XX))`, declare a "*plan*" of parallel computations on your computer (taking care to **always leave at least one core available** to handle other processes).
+>  2. Using the function `future::plan(multisession(workers = XX))`, declare a "*plan*" of parallel computations on your computer (take care to **always leave at least one core available** to handle other processes).
 >
 >  3. Using one of the *\*apply* functions `future.apply::future_*apply()`, compute the log of $n$ numbers in parallel and concatenate the results into a vector.
 >
@@ -48,7 +48,7 @@ Since `R 2.14.0`, the `parallel` package is directly included in `r fontawesome:
 library(microbenchmark)
 library(future.apply)
 
-log_seq <- function(x){
+log_seq <- function(x) {
   # try this yourself (spoiler alert: it is quite long...):
   # res <- numeric(length(x))
   # for(i in 1:length(x)){
@@ -58,7 +58,7 @@ log_seq <- function(x){
   return(log(x))
 }
 
-log_par <- function(x){
+log_par <- function(x) {
   res <- future_sapply(1:length(x), FUN = function(i) {
     log(x[i])
   })
@@ -88,7 +88,7 @@ ggplot(data2plot) + geom_violin(aes(x=Expression, y=Time, fill=Expression), alph
   ggtitle("Spoiler alert")
 ```
 
-The parallel version runs much slower... Because in fact, if the individual tasks are too fast, `r fontawesome::fa("r-project")` will spend more time communicating with the cores than doing the actual computations.
+The parallel version runs much slower... Indeed, since the individual tasks are too fast, `r fontawesome::fa("r-project")` will spend more time communicating with the cores than doing the actual computations. Hence:
 
 **A loop iteration must be relatively long for parallel computing to provide a significant gain in computation time!**
 
@@ -133,7 +133,7 @@ system.time(colmedian_for(x))
 
 
 
-> `r emoji::emoji("point_right")` ***Your turn !*** 
+> `r emoji::emoji("point_right")` ***Your turn!*** 
 > Try to further improve this computation time by parallelizing your code for each of the 100,000 variables. Is there a gain in computation time?
 
 <!-- 2. Propose an alternative implementation using the `itertools::isplitIndices()` function which allows you to separate your data (the $n$ numbers) into as many groups (or batchs) as you have cores. Compare again the computation times.
@@ -200,13 +200,13 @@ To run your code (exactly the same code, this is one of the advantages of the `f
 
 - On a computer (or a single computer server) under Unix (Linux, Mac OS), you can use `plan(multicore(workers = XX))` which is often more efficient. The `multisession` plan always works.
 
-- on a HPC cluster (like CURTA in Bordeaux), we refer to the package [`future.batchtools`](https://cran.r-project.org/web/packages/future.batchtools/vignettes/future.batchtools.html)
+- On an HPC cluster (like CURTA in Bordeaux), we refer to the package [`future.batchtools`](https://cran.r-project.org/web/packages/future.batchtools/vignettes/future.batchtools.html)
 
 
 
 ## Parallelization in our common theme example
 
-> `r emoji::emoji("point_right")` ***Your turn !*** 
+> `r emoji::emoji("point_right")` ***Your turn!*** 
 >
 >  1. From the function `mvnpdfoptim()` and/or `mvnpdfsmart()`, propose an implementation parallelizing the computations on the observations (columns of $x$)
 >  
@@ -261,5 +261,5 @@ Parallel computation saves time, but first you have to optimize your code. When 
 
 ## Annexe 6.1: Progress bar {-}
 
-package `pbapply`
+The `pbapply` package allows to get a nice progress bar for parallelized `*apply` functions execution.
 
