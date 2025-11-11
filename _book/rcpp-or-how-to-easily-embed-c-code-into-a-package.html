@@ -120,17 +120,17 @@
 <span><span class="va">mb</span></span>
 <span><span class="co">## Unit: microseconds</span></span>
 <span><span class="co">##                                                            expr      min</span></span>
-<span><span class="co">##              mvtnorm::dmvnorm(matrix(1.96, nrow = n, ncol = 2))   27.019</span></span>
-<span><span class="co">##       mvnpdf(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE) 1618.844</span></span>
-<span><span class="co">##  mvnpdfsmart(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE) 1146.237</span></span>
-<span><span class="co">##  mvnpdfoptim(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE)  666.209</span></span>
-<span><span class="co">##  mvnpdf_invC(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE) 1136.766</span></span>
-<span><span class="co">##        lq       mean   median        uq      max neval</span></span>
-<span><span class="co">##    55.186   71.14115   71.996   85.5670  234.233   100</span></span>
-<span><span class="co">##  1763.902 1900.93630 1847.788 1939.3410 3698.405   100</span></span>
-<span><span class="co">##  1212.042 1318.21601 1246.769 1277.3140 3778.355   100</span></span>
-<span><span class="co">##   717.172  748.33651  729.472  743.5555 2361.887   100</span></span>
-<span><span class="co">##  1211.755 1347.22351 1248.696 1279.0770 3217.434   100</span></span></code></pre></div>
+<span><span class="co">##              mvtnorm::dmvnorm(matrix(1.96, nrow = n, ncol = 2))   27.183</span></span>
+<span><span class="co">##       mvnpdf(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE) 1592.768</span></span>
+<span><span class="co">##  mvnpdfsmart(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE) 1184.408</span></span>
+<span><span class="co">##  mvnpdfoptim(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE)  668.997</span></span>
+<span><span class="co">##  mvnpdf_invC(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE) 1168.131</span></span>
+<span><span class="co">##         lq       mean    median       uq      max neval</span></span>
+<span><span class="co">##    49.4665   59.93052   56.5595   66.748  149.035   100</span></span>
+<span><span class="co">##  1819.5595 1951.33350 1919.4560 1976.466 3815.050   100</span></span>
+<span><span class="co">##  1269.0115 1396.38415 1298.7365 1322.435 3328.503   100</span></span>
+<span><span class="co">##   733.1825  823.86138  745.5235  754.851 2883.366   100</span></span>
+<span><span class="co">##  1254.3950 1296.40237 1281.8035 1307.756 3174.179   100</span></span></code></pre></div>
 <div class="inline-figure"><img src="endeavR_files/figure-html/unnamed-chunk-32-1.png" width="672"></div>
 </div>
 <div id="optimize-thanks-to-c" class="section level2" number="5.2">
@@ -168,13 +168,13 @@
 ##  mvnpdfsmartC(x = matrix(1.96, nrow = 2, ncol = n), mean = rep(0,      2), varcovM = diag(2), Log = FALSE)
 ##  mvnpdfoptimC(x = matrix(1.96, nrow = 2, ncol = n), mean = rep(0,      2), varcovM = diag(2), Log = FALSE)
 ##       min        lq       mean    median        uq      max neval
-##    23.083   53.7715   69.72501   69.8640   83.4760  204.508   100
-##  1586.495 1765.1320 1948.63734 1858.9400 1950.7595 3986.020   100
-##  1153.207 1222.4150 1281.24098 1251.6685 1282.7260 2882.628   100
-##   661.945  710.5505  794.67307  737.2005  750.6485 2978.978   100
-##  1157.143 1219.9755 1306.34774 1254.9075 1274.8745 3102.347   100
-##    33.538   36.4080   39.82494   38.8475   40.8565   77.203   100
-##    18.532   20.3360   24.43477   21.4430   23.4315  140.999   100</code></pre>
+##    24.231   44.6695   75.98284   55.2270   63.0580 2019.209   100
+##  1666.445 1805.3735 1960.23419 1913.8800 1981.4070 3762.488   100
+##  1166.737 1260.7295 1348.47114 1287.1130 1313.0865 3175.983   100
+##   654.770  736.2165  773.05500  747.3685  763.9325 2760.284   100
+##  1163.662 1252.8780 1379.04320 1282.1930 1319.6465 3540.719   100
+##    33.415   38.1095   41.61418   39.5650   41.2665  161.089   100
+##    18.655   21.6070   25.01246   23.0010   24.9690  149.076   100</code></pre>
 <div class="inline-figure"><img src="endeavR_files/figure-html/unnamed-chunk-34-1.png" width="672"></div>
 <p>Note that <code>Rcpp</code> functions can be used outside of a package architecture thanks to the <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html">Rcpp::sourceCpp()</a></code> function. But, as we have seen that it is always desirable to manage all of one’s code inside a package, it is unlikely that you will need this !</p>
 </div>
@@ -215,7 +215,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>endeav<svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg></strong>: <em>a course on code efficiency and software development with R</em>" was written by <strong><em>Robin Genuer</em></strong> <a href="https://robin.genuer.fr/">🌐</a> &amp; <strong><em>Boris Hejblum</em></strong> <a href="https://borishejblum.science/">🌐</a>. It was last built on 2025-11-10.</p>
+    <p>"<strong>endeav<svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg></strong>: <em>a course on code efficiency and software development with R</em>" was written by <strong><em>Robin Genuer</em></strong> <a href="https://robin.genuer.fr/">🌐</a> &amp; <strong><em>Boris Hejblum</em></strong> <a href="https://borishejblum.science/">🌐</a>. It was last built on 2025-11-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
