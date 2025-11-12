@@ -267,7 +267,7 @@ Have a look at the following webpage which informs about the different *GitHub A
 
 The *R consortium* provides the [R-hub builder](https://www.r-consortium.org/blog/2016/06/06/first-public-version-of-the-r-hub-builder), and has the ambition to one day provide a continuous integration service especially dedicated to `r fontawesome::fa("r-project")` packages.
 
-It has the advantage to use the exact same infrastructure as the `CRAN` make the *check* of your package foolproof. You can use it through the `devtools::check_rhub()` function.
+It has the advantage to use (*almost*) the **exact same infrastructure as the `CRAN`** make the *check* of your package foolproof. You can use it through the `rhub` package, by following the steps highlighted [here `r emoji::emoji("globe_with_meridians")`](https://r-hub.github.io/rhub/index.html).
 
 
 ## Appendix 2.2: Code coverage {-}
