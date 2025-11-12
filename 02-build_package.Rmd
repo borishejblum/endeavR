@@ -108,7 +108,7 @@ We strongly advise you to use the `roxygen2` package to document your packages. 
       
 **In case of problems OR out of curiosity but only once you are done**, you can have a look at this [proposal](https://endeavr.borishejblum.science/endeavR_files/mvnpdfRox.R).
       
-For more details on package documentation and `roxygen2` tags, see the [Object documentation](https://r-pkgs.org/man.html) section from Wickham & Bryan *R packages* (2023)
+For more details on package documentation and `roxygen2` tags, see the  (comprehensive) [Object documentation](https://r-pkgs.org/man.html) section from Wickham & Bryan *R packages* (2023). Documentation in `r fontawesome::fa("r-project")` uses a specific syntax, `.Rd` (that shares some resemblances with basic $\LaTeX$) (most common commands for text formatting used to be described in previous versions of the `roxygen2` companion package, [see here](https://roxygen2.r-lib.org/articles/formatting.html)). The recommended approach to formating is rather  [enable `markdown` support as described here](https://roxygen2.r-lib.org/articles/rd-formatting.html), which might be more readable in your source file.
 
 Let us finish by mentioning a function from the `usethis` package which initializes a home help page for the whole package:
 
