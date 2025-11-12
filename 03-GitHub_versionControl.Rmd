@@ -248,7 +248,7 @@ Have a look at the following webpage which informs about the different *GitHub A
 
 > ***`r emoji::emoji("point_right")` Your turn !***
 > 
-> Examine the different changes to `DESCRIPTION` sfollowing the various `usethis::use_...` run previously.
+> Examine the different changes to `DESCRIPTION` following the various `usethis::use_...` run previously.
 > 
 > If needed, modify the *URL* field from the `DESCRIPTION` file.
 
