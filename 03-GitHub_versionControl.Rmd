@@ -233,7 +233,7 @@ Another reason to use continuous integration is that it allows you to test your 
 >  2. Add a badge to your README.Rmd (do not forget to `knit` it) with the code obtained in the console and *commit* (and *push*) those changes.
 
 
-Have a look at the following webpage which informs about the different *GitHub Actions* available for `r fontawesome::fa("r-project")` packages: [https://github.com/r-lib/actions/blob/v2-branch/examples/README.md](https://github.com/r-lib/actions/blob/v2-branch/examples/README.md)
+Have a look at the following webpage which informs about the different *GitHub Actions* available for `r fontawesome::fa("r-project")` packages: [https://github.com/r-lib/actions/](https://github.com/r-lib/actions/)
 
 
 ## Build and deploy a companion website for one's package
