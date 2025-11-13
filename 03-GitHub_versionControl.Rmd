@@ -203,7 +203,7 @@ Ideally, you should propose a *pull request* that solves your *issue* when you c
 
 > `r emoji::emoji("point_right")` ***Your turn !*** 
 >
->  1. Use `usethis::use_github_links()` to add the following 2 lines to your package `DESCRIPTION` file:  
+>  1. Use `usethis::use_github_links()` to add the following 2 lines to your package `DESCRIPTION` file if there are not already present (they are also added when executing `usethis::use_github()`):  
 > `URL: http://github.com/*username*/mypkg`  
 > `BugReports: http://github.com/*username*/mypkg/issues`
 >
