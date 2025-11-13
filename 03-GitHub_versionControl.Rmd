@@ -95,7 +95,10 @@ On the other hand, the temptation to have a *"clean" and tidy* change-history is
 > `r emoji::emoji("point_right")` ***Your turn !***
 >
 > 1. Go to [https://github.com/](https://github.com/) and create a *GitHub* account (if you hesitate, a common convention is to use your *firstnamelastname* as username)
-> 2. Run `usethis::use_github()` into the `r fontawesome::fa("r-project")` console and follow the instructions.
+> 2. Follow the instructions from [chapters 9 and 10 in *Happy Git With R* by Jenny Brian ](https://happygitwithr.com/connect-intro) to store your *GitHub* authentication within *RStudio*. The general advice is to use: 
+>     - **`https`** and a *Private Access Token* with `usethis::create_github_token()` if on `r fontawesome::fa("windows")` `Windows` or `r fontawesome::fa("apple")` `MacOS` (`r emoji::emoji("right_arrow")` see [`r emoji::emoji("globe_with_meridians")` *chapter 9*](https://happygitwithr.com/https-pat))
+>     - **`ssh`** with a *pair of private and public keys* if on `r fontawesome::fa("linux")` `Linux` (`r emoji::emoji("right_arrow")` see [`r emoji::emoji("globe_with_meridians")` *chapter 10*](https://happygitwithr.com/ssh-keys))
+> 2. Then run `usethis::use_github()` into the `r fontawesome::fa("r-project")` console and follow the instructions.
 > 3. Add a `README.Rmd` file to your package in order to have a nice home page on *GitHub*:
 >    - 3a. In *RStudio*, run the command `usethis::use_readme_rmd()`
 >    - 3b. using the "*Diff*" tool in the "*Git*" tab of *RStudio*, review the changes made by the previous command
@@ -151,7 +154,7 @@ Let's take the following example: the developer $D_1$ and the developer $D_2$ ha
 `Please resolve all conflicted files, commit, then try syncing again."`
 
 Each file that is a source of conflicts has then been automatically edited with:
-```{git, eval = FALSE}
+```{sh, eval = FALSE}
 <<<<<<< HEAD
 local code
 =======
@@ -200,7 +203,7 @@ Ideally, you should propose a *pull request* that solves your *issue* when you c
 
 > `r emoji::emoji("point_right")` ***Your turn !*** 
 >
->  1. Use `usethis::use_github_links()` to add the following 2 lines to your package `DESCRIPTION` file:  
+>  1. Use `usethis::use_github_links()` to add the following 2 lines to your package `DESCRIPTION` file if there are not already present (they are also added when executing `usethis::use_github()`):  
 > `URL: http://github.com/*username*/mypkg`  
 > `BugReports: http://github.com/*username*/mypkg/issues`
 >
@@ -230,7 +233,7 @@ Another reason to use continuous integration is that it allows you to test your 
 >  2. Add a badge to your README.Rmd (do not forget to `knit` it) with the code obtained in the console and *commit* (and *push*) those changes.
 
 
-Have a look at the following webpage which informs about the different *GitHub Actions* available for `r fontawesome::fa("r-project")` packages: [https://github.com/r-lib/actions/blob/v2-branch/examples/README.md](https://github.com/r-lib/actions/blob/v2-branch/examples/README.md)
+Have a look at the following webpage which informs about the different *GitHub Actions* available for `r fontawesome::fa("r-project")` packages: [https://github.com/r-lib/actions/](https://github.com/r-lib/actions/)
 
 
 ## Build and deploy a companion website for one's package
@@ -245,7 +248,7 @@ Have a look at the following webpage which informs about the different *GitHub A
 
 > ***`r emoji::emoji("point_right")` Your turn !***
 > 
-> Examine the different changes to `DESCRIPTION` sfollowing the various `usethis::use_...` run previously.
+> Examine the different changes to `DESCRIPTION` following the various `usethis::use_...` run previously.
 > 
 > If needed, modify the *URL* field from the `DESCRIPTION` file.
 
@@ -264,7 +267,7 @@ Have a look at the following webpage which informs about the different *GitHub A
 
 The *R consortium* provides the [R-hub builder](https://www.r-consortium.org/blog/2016/06/06/first-public-version-of-the-r-hub-builder), and has the ambition to one day provide a continuous integration service especially dedicated to `r fontawesome::fa("r-project")` packages.
 
-It has the advantage to use the exact same infrastructure as the `CRAN` make the *check* of your package foolproof. You can use it through the `devtools::check_rhub()` function.
+It has the advantage to use (*almost*) the **exact same infrastructure as the `CRAN`** make the *check* of your package foolproof. You can use it through the `rhub` package, by following the steps highlighted [here `r emoji::emoji("globe_with_meridians")`](https://r-hub.github.io/rhub/index.html).
 
 
 ## Appendix 2.2: Code coverage {-}

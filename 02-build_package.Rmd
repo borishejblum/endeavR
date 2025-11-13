@@ -108,7 +108,7 @@ We strongly advise you to use the `roxygen2` package to document your packages. 
       
 **In case of problems OR out of curiosity but only once you are done**, you can have a look at this [proposal](https://endeavr.borishejblum.science/endeavR_files/mvnpdfRox.R).
       
-For more details on package documentation and `roxygen2` tags, see the [Object documentation](https://r-pkgs.org/man.html) section from Wickham & Bryan *R packages* (2023)
+For more details on package documentation and `roxygen2` tags, see the  (comprehensive) [Object documentation](https://r-pkgs.org/man.html) section from Wickham & Bryan *R packages* (2023). Documentation in `r fontawesome::fa("r-project")` uses a specific syntax, `.Rd` (that shares some resemblances with basic $\LaTeX$) (most common commands for text formatting used to be described in previous versions of the `roxygen2` companion package, [see here](https://roxygen2.r-lib.org/articles/formatting.html)). The recommended approach to formating is rather  [enable `markdown` support as described here](https://roxygen2.r-lib.org/articles/rd-formatting.html), which might be more readable in your source file.
 
 Let us finish by mentioning a function from the `usethis` package which initializes a home help page for the whole package:
 
@@ -150,7 +150,7 @@ For the moment, the package exists only in the environment associated with the *
 
 To do this, click on "Install" (`Ctrl+Shift+B`) from the "Build" tab, or alternatively you can run `devtools::install()`.
 
-And finally, you can configure *RStudio*'s behavior so that at the time of installation, it simultaneously documents the package: go to the "More" menu from the "Build" tab, then "Configure Build Tools...". Then click on "Configure" next to "Generate documentation with Roxygen", and check the box "Install and Restart".
+And finally, you can configure *RStudio*'s behavior so that at the time of installation, it simultaneously documents the package: go to the "More" menu from the "Build" tab, then "Configure Build Tools...". Then click on "Configure" next to "Generate documentation with Roxygen", and check the box "Install and Restart" (if it is not already ticked).
 
 
 ## Automatically test your package

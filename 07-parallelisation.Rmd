@@ -198,7 +198,7 @@ iterators::nextElem(myiter)
 
 To run your code (exactly the same code, this is one of the advantages of the `future*` family packages), you need to set up a "plan" of computations:
 
-- On a computer (or a single computer server) under Unix (Linux, Mac OS), you can use `plan(multicore(workers = XX))` which is often more efficient. The `multisession` plan always works.
+- On a computer (or a single computer server) under Unix (`r fontawesome::fa("linux")` Linux, `r fontawesome::fa("apple")` MacOS), you can use `plan(multicore(workers = XX))` which is often more efficient. The `multisession` plan always works.
 
 - On an HPC cluster (like CURTA in Bordeaux), we refer to the package [`future.batchtools`](https://cran.r-project.org/web/packages/future.batchtools/vignettes/future.batchtools.html)
 
@@ -261,5 +261,5 @@ Parallel computation saves time, but first you have to optimize your code. When 
 
 ## Annexe 6.1: Progress bar {-}
 
-The `pbapply` package allows to get a nice progress bar for parallelized `*apply` functions execution.
+The [`pbapply` package](https://peter.solymos.org/pbapply/) allows to get a nice progress bar for parallelized `*apply` functions execution, and its parallelization capabilities are relatively straightforward to use (very straightforward on both `r fontawesome::fa("linux")` Linux, `r fontawesome::fa("apple")` MacOS, slightly more involved on `r fontawesome::fa("windows")` Windows). Try it out !
 
