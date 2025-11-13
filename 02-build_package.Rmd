@@ -96,7 +96,7 @@ We strongly advise you to use the `roxygen2` package to document your packages. 
 >      
 >      - if you fill in a third paragraph, this part will go in the "Details" section of the help page
  >     
- >     - the meaning of the parameters
+ >     - the meaning of the parameters (add it after a blank space next to the name of the parameter)
  >     
  >     - the output, after the `@return` tag
  >     
