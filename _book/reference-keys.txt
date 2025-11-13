@@ -41,3 +41,4 @@ efficient-parallelization
 other-plans-for-parallel-computations
 parallelization-in-our-common-theme-example
 conclusion
+iterators
