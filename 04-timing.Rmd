@@ -31,7 +31,7 @@ system.time(mvtnorm::dmvnorm(obs))
 
 We could imagine that we need to increase the complexity of our calculation to be able to compare them, but there is actually a better way: the use of the `microbenchmark` package!
 
-
+**NB**: It can be convenient to add an `.R` file in your package folder to add those commands (or testing your functions more generally), but do not forget to ignore it from the package building and also optionnally from the git. For that, your can use `usethis::use_build_ignore("name_of_file.R")` and `usethis::use_git_ignore("name_of_file.R")`.
 
 ## Compare execution times with `microbenchmark()`
 

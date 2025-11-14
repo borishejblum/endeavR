@@ -9,14 +9,16 @@ library(ggplot2)
 
 *Profiling* is about determining which part of the code takes the most time to compute (and also memory-wise). Once we have found the block of code that takes the longest time to execute, our goal is only to optimize that small part of the code.
 
-To get a *profiling* of the code below, select the lines of code of interest and go to the "*Profile*" menu then "*Profile Selected Lines*". It uses the `profvis()` function of the package `profvis`. 
+To get a *profiling* of the code below, select the lines of code of interest and go to the "*Profile*" menu then "*Profile Selected Lines*".
 
 ```{r, eval=FALSE}
 n <- 10e4
 pdfval <- mvnpdf(x=matrix(1.96, nrow = 2, ncol = n), Log=FALSE)
 ```
 
-```{r, echo=FALSE}
+It uses the `profvis()` function of the package `profvis`, so you can alternatively use it:
+
+```{r, echo=TRUE}
 n <- 10e4
 profvis::profvis(mvnpdf(x=matrix(1.96, nrow = 2, ncol = n), Log=FALSE))
 ```
@@ -26,7 +28,7 @@ profvis::profvis(mvnpdf(x=matrix(1.96, nrow = 2, ncol = n), Log=FALSE))
 
 ## Comparison with an improved implementation of `mnvpdf()`.
 
-Consider a new version of `mvnpdf()`, called `mvnpdfsmart()`. Download the [file](https://endeavr.borishejblum.science/endeavR_files/mvnpdfsmart.R), and then include it in the package.
+Consider a new version of `mvnpdf()`, called `mvnpdfsmart()`. Download the [file](https://endeavr.borishejblum.science/endeavR_files/mvnpdfsmart.R), and then include it in the package (i.e., save it into the `R/` folder and add minimally the `@export` Roxygen tag at the top of it, and then document/build your package).
 
 Now profile the following command:
 
