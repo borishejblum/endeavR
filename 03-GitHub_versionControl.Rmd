@@ -122,7 +122,7 @@ On the other hand, the temptation to have a *"clean" and tidy* change-history is
 >
   2. A few moments later, the added collaborator receives an email inviting him to accept the addition (check your spam folder). Click on the link and accept.
 >
-  3. In *RStudio*, create a new project form `git` using the `https` url of your buddy's project.
+  3. In *RStudio*, create a new package with the `usethis::create_from_github()` function using the https or ssh link of your buddy's project.
    
 ### *Branches*
 

@@ -10,19 +10,19 @@ More details are provided in the reference material on this subject: the book [*
 
 ## Initializing a package
 
-A simple way, built into *RStudio*, to **initialize a package** is to follow those steps:
-
 > `r emoji::emoji("point_right")` ***Your turn*** (already)!
 >
->  1. Create a new project (top left `File` drop down menu in *RStudio*)
->  
->  2. Choose "*New Directory*"
->  
->  3. Choose "*R package using devtools*" (if it is not available, choose "*R package*", the difference being that with "*R package*" you will have to delete unnecessary files that are automatically created but not useful)
->  
->  4. Give a name to your package, for example `mypkgr`.
-  
-**NB:** if you are using [Posit Cloud](https://posit.cloud/) and not your local computer, you need to rather execute the following command into the `r fontawesome::fa("r-project")` console: `usethis::create_package("mypkgr")` and accept the potential proposed overwrites.
+> A simple way to **initialize a package**, named `mypkgr`, is to use `usethis::create_package("mypkgr")`
+<!-- > -->
+<!-- >  1. Create a new project (top left `File` drop down menu in *RStudio*) -->
+<!-- >   -->
+<!-- >  2. Choose "*New Directory*" -->
+<!-- >   -->
+<!-- >  3. Choose "*R package using devtools*" (if it is not available, choose "*R package*", the difference being that with "*R package*" you will have to delete unnecessary files that are automatically created but not useful) -->
+<!-- >   -->
+<!-- >  4. Give a name to your package, for example `mypkgr`. -->
+
+<!-- **NB:** if you are using [Posit Cloud](https://posit.cloud/) and not your local computer, you need to rather execute the following command into the `r fontawesome::fa("r-project")` console: `usethis::create_package("mypkgr")` and accept the potential proposed overwrites. -->
   
 From that, we get the **minimal structure for an** `r fontawesome::fa("r-project")` package, namely:
 
@@ -33,7 +33,7 @@ From that, we get the **minimal structure for an** `r fontawesome::fa("r-project
   - a folder **R/** in which we will add `.R` script files
   
   
-`devtools` also adds three ***optional* files**:
+We also have three ***optional* files**:
 
   - **.gitignore**, relative to `git`, a version control tool that we will see in detail in the following section on `git` & *GitHub*
   

@@ -36,7 +36,7 @@ In `r fontawesome::fa("r-project")` the `parallel` package allows to start and s
 >
 >  1. Determine how many cores are available on your computer with the function `future::availableCores()` (under Linux, prefer `parallel::detectCores(logical=FALSE)` to avoid overthreading).
 >
->  2. Using the function `future::plan(multisession(workers = XX))`, declare a "*plan*" of parallel computations on your computer (take care to **always leave at least one core available** to handle other processes).
+>  2. Load the `future` package and using the function `future::plan(multisession(workers = XX))`, declare a "*plan*" of parallel computations on your computer (take care to **always leave at least one core available** to handle other processes).
 >
 >  3. Using one of the *\*apply* functions `future.apply::future_*apply()`, compute the log of $n$ numbers in parallel and concatenate the results into a vector.
 >
