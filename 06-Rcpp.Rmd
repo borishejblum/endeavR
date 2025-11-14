@@ -89,6 +89,8 @@ You can download our proposal for `mvnpdfsmartC.cpp` [here](https://endeavr.bori
 
 For (relatively small) additional speed gain (at the cost of code readability!), you can have a look at our optimized Armadillo `C++` implementation in [`mvnpdfoptimC.cpp`](https://endeavr.borishejblum.science/endeavR_files/mvnpdfoptimC.cpp).
 
+Finally, we asked **LeChat** from *Mistral AI* to propose improvements over this last `mvnpdfoptimC()` function and it delivered an additional few microseconds speedup implemented in [`mvnpdfC_LeChat.cpp`](https://endeavr.borishejblum.science/endeavR_files/mvnpdfC_LeChat.cpp).
+
 ```{r, echo=TRUE, eval=TRUE}
 n <- 1000
 mb <- microbenchmark(mvtnorm::dmvnorm(matrix(1.96, nrow = n, ncol = 2)),
@@ -98,6 +100,7 @@ mb <- microbenchmark(mvtnorm::dmvnorm(matrix(1.96, nrow = n, ncol = 2)),
                      mvnpdf_invC(x=matrix(1.96, nrow = 2, ncol = n), Log=FALSE),
                      mvnpdfsmartC(x=matrix(1.96, nrow = 2, ncol = n), mean = rep(0, 2), varcovM = diag(2), Log=FALSE),
                      mvnpdfoptimC(x=matrix(1.96, nrow = 2, ncol = n), mean = rep(0, 2), varcovM = diag(2), Log=FALSE),
+                     mvnpdfC_LeChat(x=matrix(1.96, nrow = 2, ncol = n), mean = rep(0, 2), varcovM = diag(2), Log=FALSE),
                      times=100L)
 mb
 ```
@@ -110,13 +113,15 @@ brk <- NULL
 for(i in rangeTime){
     brk <- c(brk, seq(from = 10^i, to = 10^(i+1), by=10^i))
 }
-ggplot(data2plot) + geom_violin(aes(x=Expression, y=Time, fill=Expression), alpha=0.8)  +
+ggplot(data2plot) + 
+  geom_violin(aes(x=Expression, y=Time, fill=Expression), alpha=0.8)  +
   viridis::scale_fill_viridis(guide="none", discrete=TRUE) + 
   scale_y_log10(minor_breaks=brk) + 
   ylab("Execution timings (milli-sec)") +
   xlab("Computed expression") +
   annotation_logticks(sides="l") +
-  theme_bw() 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle=45, hjust=1))
 ```
 
 Note that `Rcpp` functions can be used outside of a package architecture thanks to the `Rcpp::sourceCpp()` function. But, as we have seen that it is always desirable to manage all of one's code inside a package, it is unlikely that you will need this !

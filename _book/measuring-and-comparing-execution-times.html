@@ -78,7 +78,7 @@
 <code class="sourceCode R"><span><span class="va">obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1.96</span>, <span class="fl">2</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">2</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="fu">mvnpdf</span><span class="op">(</span>x<span class="op">=</span><span class="va">obs</span>, Log<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.001   0.001   0.002</code></pre>
+##   0.000   0.000   0.001</code></pre>
 <p>The problem that appears in this example is that the execution is so fast that <code><a href="https://rdrr.io/r/base/system.time.html">system.time()</a></code> displays <code>0</code> (or a very close value) that will be impossible to compare to an hopefully faster implementation. Also, we see that there is some variability when we run the command several times.</p>
 <p>Thus if we want to compare our code with the <code><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html">mvtnorm::dmvnorm()</a></code> function, we can’t use <code><a href="https://rdrr.io/r/base/system.time.html">system.time()</a></code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -105,11 +105,11 @@
 <code class="sourceCode R"><span><span class="va">mb</span></span></code></pre></div>
 <pre><code>## Unit: microseconds
 ##                                           expr    min     lq     mean median
-##                 mvtnorm::dmvnorm(rep(1.96, 2)) 10.414 11.193 12.57581 12.136
-##  mvnpdf(x = matrix(rep(1.96, 2)), Log = FALSE)  9.840 10.537 12.70401 11.398
+##                 mvtnorm::dmvnorm(rep(1.96, 2)) 10.414 11.398 12.55002  12.30
+##  mvnpdf(x = matrix(rep(1.96, 2)), Log = FALSE)  9.881 10.701 12.89380  11.48
 ##      uq     max neval
-##  13.325  35.916  1000
-##  12.423 910.118  1000</code></pre>
+##  13.284   29.93  1000
+##  12.382 1074.20  1000</code></pre>
 <div class="inline-figure"><img src="endeavR_files/figure-html/unnamed-chunk-12-1.png" width="672"></div>
 <p>Both <code>mvnpdf()</code> and <code>dmnvorm()</code> functions being able to take a matrix as input, we can also compare their speeds in this setting:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -120,12 +120,12 @@
 <span>                     times<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span>
 <span><span class="va">mb</span></span></code></pre></div>
 <pre><code>## Unit: microseconds
-##                                                       expr     min       lq
-##         mvtnorm::dmvnorm(matrix(1.96, nrow = n, ncol = 2))  15.621  17.3635
-##  mvnpdf(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE) 134.111 141.3270
-##      mean  median      uq     max neval
-##   19.9752  18.778  20.541  88.683   100
-##  151.4429 150.060 157.440 198.358   100</code></pre>
+##                                                       expr     min      lq
+##         mvtnorm::dmvnorm(matrix(1.96, nrow = n, ncol = 2))  15.621  16.605
+##  mvnpdf(x = matrix(1.96, nrow = 2, ncol = n), Log = FALSE) 134.070 139.605
+##       mean  median       uq     max neval
+##   19.21342  17.999  19.9465  71.504   100
+##  147.20640 144.689 152.9300 192.946   100</code></pre>
 <div class="inline-figure"><img src="endeavR_files/figure-html/unnamed-chunk-14-1.png" width="672"></div>
 <p>Something happened… And we will find out what exactly is causing this issue in what comes next.</p>
 
@@ -157,7 +157,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>endeav<svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg></strong>: <em>a course on code efficiency and software development with R</em>" was written by <strong><em>Robin Genuer</em></strong> <a href="https://robin.genuer.fr/">🌐</a> &amp; <strong><em>Boris Hejblum</em></strong> <a href="https://borishejblum.science/">🌐</a>. It was last built on 2025-11-13.</p>
+    <p>"<strong>endeav<svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg></strong>: <em>a course on code efficiency and software development with R</em>" was written by <strong><em>Robin Genuer</em></strong> <a href="https://robin.genuer.fr/">🌐</a> &amp; <strong><em>Boris Hejblum</em></strong> <a href="https://borishejblum.science/">🌐</a>. It was last built on 2025-11-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

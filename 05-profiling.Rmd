@@ -146,7 +146,7 @@ ggplot(data2plot) + geom_violin(aes(x=Expression, y=Time, fill=Expression), alph
 
 Finally,  we can profile the `dmvnorm()` function:
 
-```{r, eval=TRUE}
+```{r, eval=TRUE, error=TRUE}
 n <- 10e6
 profvis::profvis(mvtnorm::dmvnorm(matrix(1.96, nrow = n, ncol = 2)))
 profvis::profvis(mypkgr::my_dmvnorm(matrix(1.96, nrow = n, ncol = 2)))
