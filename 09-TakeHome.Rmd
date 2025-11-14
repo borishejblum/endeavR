@@ -1,7 +1,7 @@
 
 # Take-home message {-}
 
- 1. **MAKE PACKAGES!**
+ 1. ***MAKE PACKAGES!***
  
  2. Use `git`, at least locally for yourself.
  
